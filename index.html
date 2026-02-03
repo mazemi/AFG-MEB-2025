@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Afghanistan Food Cost Map</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h2>Afghanistan MEB 2025</h2>
+
+  <div class="control">
+    <label for="monthSelect">Month:</label>
+    <select id="monthSelect"></select>
+  </div>
+
+  <div class="control">
+    <label>
+      <input type="checkbox" id="regionsToggle" checked> Regions
+    </label>
+    <label>
+      <input type="checkbox" id="provincesToggle" checked> Provinces
+    </label>
+  </div>
+</header>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Legend Overlay -->
+<div id="legendOverlay">
+  <h4>MEB Cost (AFN)</h4>
+  <div class="legend-item"><span style="background:#1a9850"></span> ≤ 16,500</div>
+  <div class="legend-item"><span style="background:#91cf60"></span> 16,501 – 18,000</div>
+  <div class="legend-item"><span style="background:#ffffbf"></span> 18,001 – 19,500</div>
+  <div class="legend-item"><span style="background:#fc8d59"></span> 19,501 – 21,000</div>
+  <div class="legend-item"><span style="background:#d73027"></span> ≥ 21,001</div>
+</div>
+
+<!-- National Summary -->
+<div id="nationalPanel">
+  <h4>National Overview</h4>
+  <div id="nationalContent">Loading…</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
