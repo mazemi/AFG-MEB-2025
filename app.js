@@ -35,20 +35,21 @@ function getColor(v) {
   return "#d73027";
 }
 
+
 /* ======================================================
-   LOAD CSV (FIXED)
+   LOAD meb (FIXED)
 ====================================================== */
-Papa.parse("data/meb.csv", {
-  download: true,
+Papa.parse(mebCSV, {
   header: true,
   dynamicTyping: true,
+  skipEmptyLines: true,
   complete: r => {
     r.data.forEach(row => {
       if (!row.level || !row.month) return;
 
       const level = row.level.trim().toLowerCase();
 
-      // NATIONAL (FIX)
+      // NATIONAL
       if (level === "national") {
         foodIndex.national[row.month] = {
           meb_AFN: +row.meb_AFN
@@ -73,24 +74,17 @@ Papa.parse("data/meb.csv", {
    LOAD GEOJSON
 ====================================================== */
 function loadGeoJSON() {
-  fetch("data/regions.geojson")
-    .then(r => r.json())
-    .then(g => {
-      regionLayer = L.geoJSON(g, {
-        style: f => styleFeature("region", f.properties.Region_Code),
-        onEachFeature: (f, l) => bindPopup(l, f, "region")
-      }).addTo(map);
-    });
+  regionLayer = L.geoJSON(regionsGeoJSON, {
+    style: f => styleFeature("region", f.properties.Region_Code),
+    onEachFeature: (f, l) => bindPopup(l, f, "region")
+  }).addTo(map);
 
-  fetch("data/provinces.geojson")
-    .then(r => r.json())
-    .then(g => {
-      provinceLayer = L.geoJSON(g, {
-        style: f => styleFeature("province", f.properties.Province_Code),
-        onEachFeature: (f, l) => bindPopup(l, f, "province")
-      }).addTo(map);
-    });
+  provinceLayer = L.geoJSON(provincesGeoJSON, {
+    style: f => styleFeature("province", f.properties.Province_Code),
+    onEachFeature: (f, l) => bindPopup(l, f, "province")
+  }).addTo(map);
 }
+
 
 /* ======================================================
    STYLE
